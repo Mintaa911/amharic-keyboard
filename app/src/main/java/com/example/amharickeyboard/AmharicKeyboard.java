@@ -1,6 +1,7 @@
 package com.example.amharickeyboard;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.inputmethodservice.InputMethodService;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
@@ -29,9 +30,20 @@ public class AmharicKeyboard extends InputMethodService implements KeyboardView.
     TextView suggestion3;
     TextView suggestion4;
     InputConnection inputConnection;
+    Suggestion suggestion;
 
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        suggestion = Suggestion.createInstance();
+    }
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        Log.d("SoftKeyboard", "onConfigurationChanged()");
+        android.os.Debug.waitForDebugger();
 
-
+        super.onConfigurationChanged(newConfig);
+    }
 
     @Override
     public View onCreateInputView() {
@@ -94,6 +106,7 @@ public class AmharicKeyboard extends InputMethodService implements KeyboardView.
     void createSuggestion(String inputString){
         String s = inputConnection.getExtractedText(new ExtractedTextRequest(),0).text.toString();
         suggestion1.setText(s);
+        suggestion.getSuggestions("text");
     }
 
     public void selectSuggestion(View view){
