@@ -14,6 +14,8 @@ import android.view.inputmethod.InputConnection;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -31,6 +33,7 @@ public class AmharicKeyboard extends InputMethodService implements KeyboardView.
     TextView suggestion4;
     InputConnection inputConnection;
     Suggestion suggestion;
+    ArrayList<TextView> suggestionViews;
 
     @Override
     public void onCreate() {
@@ -60,10 +63,15 @@ public class AmharicKeyboard extends InputMethodService implements KeyboardView.
         mCandidateView = (LinearLayout) getLayoutInflater().inflate(R.layout.prediction,null);
         innerLayout = mCandidateView.findViewById(R.id.innerLayout);
 
-        suggestion1 = innerLayout.findViewById(R.id.suggestion1);
-        suggestion2 = innerLayout.findViewById(R.id.suggestion2);
-        suggestion3 = innerLayout.findViewById(R.id.suggestion3);
-        suggestion4 = innerLayout.findViewById(R.id.suggestion4);
+//        suggestion1 = innerLayout.findViewById(R.id.suggestion1);
+//        suggestion2 = innerLayout.findViewById(R.id.suggestion2);
+//        suggestion3 = innerLayout.findViewById(R.id.suggestion3);
+//        suggestion4 = innerLayout.findViewById(R.id.suggestion4);
+
+        suggestionViews.add(innerLayout.findViewById(R.id.suggestion1));
+        suggestionViews.add(innerLayout.findViewById(R.id.suggestion2));
+        suggestionViews.add(innerLayout.findViewById(R.id.suggestion3));
+        suggestionViews.add(innerLayout.findViewById(R.id.suggestion4));
 
         setCandidatesViewShown(true);
         return mCandidateView;
@@ -105,8 +113,18 @@ public class AmharicKeyboard extends InputMethodService implements KeyboardView.
 
     void createSuggestion(String inputString){
         String s = inputConnection.getExtractedText(new ExtractedTextRequest(),0).text.toString();
-        suggestion1.setText(s);
-        suggestion.getSuggestions("text");
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList= suggestion.getSuggestions("text");
+
+        for (int i = 0; i < arrayList.size(); i++) {
+            suggestionViews.get(i).setText(arrayList.get(i));
+        }
+
+//        suggestion1.setText(arrayList.get(0));
+//        suggestion2.setText(arrayList.get(1));
+//        suggestion3.setText(arrayList.get(2));
+//        suggestion4.setText(arrayList.get(3));
+
     }
 
     public void selectSuggestion(View view){
