@@ -3,6 +3,7 @@ package com.example.amharickeyboard;
 import android.util.Log;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -22,7 +23,7 @@ public class Suggestion {
         return instance;
     }
 
-    public String getSuggestions(String text){
+    public ArrayList<String> getSuggestions(String text){
         try {
             post(text);
 
