@@ -5,7 +5,7 @@
 
 
     <Row>
-        <Key android:keyLabel="አ" android:codes="476" android:keyEdgeFlags="left"/>
+        <Key android:keyLabel="አ" android:codes="4768" android:keyEdgeFlags="left"/>
         <Key android:keyLabel="ኡ"  android:codes="4769" />
         <Key android:keyLabel="ኢ"  android:codes="4770" />
         <Key android:keyLabel="ኣ" android:codes="4771" />

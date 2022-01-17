@@ -11,11 +11,11 @@
         <Key android:keyLabel="ላ" android:codes="4619" />
         <Key android:keyLabel="ሌ"  android:codes="4620" />
         <Key android:keyLabel="ል"  android:codes="4621" />
-        <Key android:keyLabel=""  android:codes="462" android:keyEdgeFlags="right"/>
+        <Key android:keyLabel="ሎ"  android:codes="4622" android:keyEdgeFlags="right"/>
 
     </Row>
 
-
+2
     <Row>
         <Key android:keyLabel="ህ" android:keyEdgeFlags="left" android:codes="4613" />
         <Key android:keyLabel="ል" android:codes="4621" />

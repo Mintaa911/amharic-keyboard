@@ -13,11 +13,20 @@ import android.view.inputmethod.ExtractedTextRequest;
 import android.view.inputmethod.InputConnection;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.amharickeyboard.HttpClient.RetrofitClient;
 
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AmharicKeyboard extends InputMethodService implements KeyboardView.OnKeyboardActionListener {
 
@@ -32,14 +41,8 @@ public class AmharicKeyboard extends InputMethodService implements KeyboardView.
     TextView suggestion3;
     TextView suggestion4;
     InputConnection inputConnection;
-    Suggestion suggestion;
-    ArrayList<TextView> suggestionViews;
+    ArrayList<TextView> suggestionViews = new ArrayList<TextView>();
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        suggestion = Suggestion.createInstance();
-    }
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         Log.d("SoftKeyboard", "onConfigurationChanged()");
@@ -97,33 +100,52 @@ public class AmharicKeyboard extends InputMethodService implements KeyboardView.
             case -1:
 //                Log.d("TAG", "onKey: delete");
                 inputConnection.deleteSurroundingText(1,0);
-                createSuggestion("");
+                createSuggestion();
 
                 break;
             default:
 //                Log.d("TAG", "onKey: default ");
                 char c = (char) i;
                 inputConnection.commitText(String.valueOf(c),1);
-                createSuggestion("");
+                createSuggestion();
 
 
         }
 
     }
 
-    void createSuggestion(String inputString){
-        String s = inputConnection.getExtractedText(new ExtractedTextRequest(),0).text.toString();
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList= suggestion.getSuggestions("text");
+    void createSuggestion(){
+        String word = inputConnection.getExtractedText(new ExtractedTextRequest(),0).text.toString();
+        if(!(word != null && !word.equals("")))return;
+        List<String> splited = Arrays.asList(word.split("\\s+"));
 
-        for (int i = 0; i < arrayList.size(); i++) {
-            suggestionViews.get(i).setText(arrayList.get(i));
-        }
+//        splited = (splited.stream().map(e -> {
+//            if(!e.equals(" "))return e;
+//            return null;
+//        }).collect(Collectors.toList()));
 
-//        suggestion1.setText(arrayList.get(0));
-//        suggestion2.setText(arrayList.get(1));
-//        suggestion3.setText(arrayList.get(2));
-//        suggestion4.setText(arrayList.get(3));
+        Call<List<String>> call = RetrofitClient.getInstance().getMyApi().getSugessions(String.join(" ",splited));
+        call.enqueue(new Callback<List<String>>() {
+            @Override
+            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+                List<String> sugessionResponse = response.body();
+                for (TextView target : suggestionViews) {
+                    target.setText("");
+                }
+                Log.d("TAG", sugessionResponse.toString());
+                for (int i = 0; i < (sugessionResponse.size() > 4 ? 4 : sugessionResponse.size()); i++) {
+                    suggestionViews.get(i).setText(sugessionResponse.get(i));
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<String>> call, Throwable t) {
+                Log.e("TAG", "onFailure:  "+ t.getMessage());
+                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
+            }
+
+        });
 
     }
 
@@ -131,9 +153,12 @@ public class AmharicKeyboard extends InputMethodService implements KeyboardView.
         TextView tv = (TextView) view;
         String s = tv.getText().toString();
         ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(s.split(" ")));
+
         int x = arrayList.get(arrayList.size()-1).length();
-        inputConnection.deleteSurroundingText(x,1);
-        inputConnection.commitText("ትቆማ",1);
+        createSuggestion();
+//        inputConnection.deleteSurroundingText(x,1);
+        inputConnection.commitText(" "+ s,1);
+
     }
 
     public void switchKeyboard(InputConnection inputConnection,int code){
@@ -370,7 +395,7 @@ public class AmharicKeyboard extends InputMethodService implements KeyboardView.
             case 4799:
                 key_family = 4797;
                 first_time_selected = 0;
-                keyboard = new Keyboard(this,R.xml.q_amharic);
+                keyboard = new Keyboard(this,R.xml.aa_amharic);
                 break;
             case 4712:
             case 4713:
