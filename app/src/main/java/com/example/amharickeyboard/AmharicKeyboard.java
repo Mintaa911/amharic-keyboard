@@ -24,6 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -100,14 +101,14 @@ public class AmharicKeyboard extends InputMethodService implements KeyboardView.
             case -1:
 //                Log.d("TAG", "onKey: delete");
                 inputConnection.deleteSurroundingText(1,0);
-                createSuggestion();
+//                createSuggestion();
 
                 break;
             default:
 //                Log.d("TAG", "onKey: default ");
                 char c = (char) i;
                 inputConnection.commitText(String.valueOf(c),1);
-                createSuggestion();
+//                createSuggestion();
 
 
         }
@@ -410,15 +411,15 @@ public class AmharicKeyboard extends InputMethodService implements KeyboardView.
                 first_time_selected = 0;
                 keyboard = new Keyboard(this,R.xml.v_amharic);
                 break;
-            case 4804:
-            case 4805:
-            case 4806:
-            case 4807:
             case 4808:
             case 4809:
             case 4810:
             case 4811:
-                key_family = 4809;
+            case 4812:
+            case 4813:
+            case 4814:
+            case 4815:
+                key_family = 4813;
                 first_time_selected = 0;
                 keyboard = new Keyboard(this,R.xml.w_amharic);
                 break;
@@ -529,6 +530,18 @@ public class AmharicKeyboard extends InputMethodService implements KeyboardView.
                 key_family = 4909;
                 first_time_selected = 0;
                 keyboard = new Keyboard(this,R.xml.c_amharic);
+                break;
+            case 491:
+            case 4913:
+            case 4914:
+            case 4915:
+            case 4916:
+            case 4917:
+            case 4918:
+            case 4919:
+                key_family = 4917;
+                first_time_selected = 0;
+                keyboard = new Keyboard(this,R.xml.pe_amharic);
                 break;
             case 4920:
             case 4921:

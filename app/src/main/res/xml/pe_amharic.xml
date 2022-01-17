@@ -12,7 +12,7 @@
         <Key android:keyLabel="ጴ"  android:codes="4916" />
         <Key android:keyLabel="ጵ"  android:codes="4917" />
         <Key android:keyLabel="ጶ"  android:codes="4918" />
-        <Key android:keyLabel=""  android:codes="4919" android:keyEdgeFlags="right"/>
+        <Key android:keyLabel="ጷ"  android:codes="4919" android:keyEdgeFlags="right"/>
     </Row>
 
 

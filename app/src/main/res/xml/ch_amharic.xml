@@ -5,11 +5,11 @@
 
 
     <Row>
-        <Key android:keyLabel="ቸ" android:codes="4628" android:keyEdgeFlags="left"/>
-        <Key android:keyLabel="ቹ"  android:codes="4629" />
-        <Key android:keyLabel="ቺ"  android:codes="4630" />
-        <Key android:keyLabel="ቻ" android:codes="4631" />
-        <Key android:keyLabel="ቼ"  android:codes="4632" />
+        <Key android:keyLabel="ቸ" android:codes="4728" android:keyEdgeFlags="left"/>
+        <Key android:keyLabel="ቹ"  android:codes="4729" />
+        <Key android:keyLabel="ቺ"  android:codes="4730" />
+        <Key android:keyLabel="ቻ" android:codes="4731" />
+        <Key android:keyLabel="ቼ"  android:codes="4732" />
         <Key android:keyLabel="ች"  android:codes="4733" />
         <Key android:keyLabel="ቾ"  android:codes="4734" />
         <Key android:keyLabel="ቿ"  android:codes="4735" android:keyEdgeFlags="right"/>

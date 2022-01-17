@@ -5,14 +5,14 @@
 
 
     <Row>
-        <Key android:keyLabel="ገ" android:codes="4877" android:keyEdgeFlags="left"/>
-        <Key android:keyLabel="ጉ"  android:codes="4877" />
-        <Key android:keyLabel="ጊ"  android:codes="4877" />
-        <Key android:keyLabel="ጋ" android:codes="4877" />
-        <Key android:keyLabel="ጌ"  android:codes="4877" />
+        <Key android:keyLabel="ገ" android:codes="4872" android:keyEdgeFlags="left"/>
+        <Key android:keyLabel="ጉ"  android:codes="4873" />
+        <Key android:keyLabel="ጊ"  android:codes="4874" />
+        <Key android:keyLabel="ጋ" android:codes="4875" />
+        <Key android:keyLabel="ጌ"  android:codes="4876" />
         <Key android:keyLabel="ግ"  android:codes="4877" />ዶ
-        <Key android:keyLabel="ጎ"  android:codes="4877" />
-        <Key android:keyLabel="ጓ"  android:codes="4877" android:keyEdgeFlags="right"/>
+        <Key android:keyLabel="ጎ"  android:codes="4878" />
+        <Key android:keyLabel="ጓ"  android:codes="4879" android:keyEdgeFlags="right"/>
     </Row>
 
 
